@@ -1,0 +1,80 @@
+Problem of Insert a node at the beginning 
+Write a C program to insert a node at the beginning of a Singly Linked List (SLL).
+
+The program should first take the number of nodes N as input.
+Then, it should take N integers as input and create the linked list by inserting each node at the beginning (head).
+After inserting all nodes, the program should display the linked list.
+
+Constraints:
+1 ≤ N ≤ 100 (Number of nodes)
+-10^6 ≤ Data ≤ 10^6 (Node values)
+Input should be read at runtime (No static inputs).
+Output should print the linked list from head to tail after inserting all nodes.
+
+Example:
+Sample 1:
+Input:
+
+5  
+10 20 30 40 50
+
+Output:
+
+50 -> 40 -> 30 -> 20 -> 10 -> NULL
+
+Sample 2:
+Input:
+
+3  
+-1 0 1
+
+Output:
+
+1 -> 0 -> -1 -> NULL
+
+ 
+
+In Sample 1, the input elements are inserted at the beginning of the linked list one by one.
+Initially, the list is empty.
+After inserting 10, list: 10 -> NULL
+After inserting 20, list: 20 -> 10 -> NULL
+After inserting 30, list: 30 -> 20 -> 10 -> NULL
+After inserting 40, list: 40 -> 30 -> 20 -> 10 -> NULL
+After inserting 50, list: 50 -> 40 -> 30 -> 20 -> 10 -> NULL
+
+Explanation:
+createNode():
+Dynamically creates a node using malloc() and assigns the value to it.
+insertAtBeginning():
+Inserts the new node at the beginning (head) of the linked list.
+displayList():
+Traverses the linked list and prints each node's value.
+Dynamic Input:
+The input is captured at runtime using scanf() without any static input.
+✅ Key Highlights:
+✅ Dynamic Memory Allocation (No static inputs).
+✅ Insertion at Beginning functionality.
+✅ Handles Negative, Positive, and Zero values.
+✅ Memory Safety: Proper use of malloc() for dynamic memory allocation.
+✅ Edge Cases:
+If N=1, it should create only one node.
+If N=0, the output should be NULL.
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+4
+1 2 3 4
+4 -> 3 -> 2 -> 1 -> NULL
+2	
+6
+10 20 30 40 50 60
+60 -> 50 -> 40 -> 30 -> 20 -> 10 -> NULL
+3	
+5
+-10 -5 0 5 10
+10 -> 5 -> 0 -> -5 -> -10 -> NULL
+4	
+2
+100 200
+200 -> 100 -> NULL
