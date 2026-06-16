@@ -1,0 +1,55 @@
+Write a C program to construct a binary tree using level-order input (where -1 denotes NULL/missing child), and then mirror the tree. The mirrored tree should have left and right children swapped recursively for all nodes. Finally, print the inorder traversal of the mirrored tree.
+
+
+Constraints:
+1≤N≤100 — number of elements in input (including -1 as NULLs)
+
+Node values range from −10^4-10^4
+
+
+Example:
+Sample Input-1:
+
+7
+1 2 3 -1 -1 -1 -1
+
+Sample Output-1:
+
+3 1 2
+
+Sample Input-2:
+
+3
+1 -1 2
+
+Sample Output-2:
+
+2 1
+
+
+Explanation:
+Tree is built using level-order input with -1 representing NULLs.
+
+Each subtree is mirrored recursively by swapping left and right pointers.
+
+After mirroring, an inorder traversal (Left, Root, Right) is printed.
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+7
+1 2 3 -1 -1 -1 -1
+3 1 2
+2	
+3
+1 -1 2
+2 1
+3	
+1
+5
+5
+4	
+5
+1 2 -1 3 -1
+1 2 3
