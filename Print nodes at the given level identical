@@ -1,0 +1,69 @@
+Write a C program to construct two binary trees from level-order input (using -1 for NULLs) and check if the nodes at a given level K in both trees are identical (i.e., the same number of nodes and same values in the same order).
+
+
+Constraints:
+1≤N≤100 — Total number of elements (including -1s)
+
+1≤K≤100 — Level to compare (root is at level 1)
+
+
+Example:
+Sample Input-1:
+
+7
+1 2 3 -1 -1 -1 -1
+7
+1 2 3 -1 -1 -1 -1
+2
+
+Sample Output-1:
+
+Yes
+
+Sample input-2:
+
+7
+1 2 3 -1 -1 -1 -1
+7
+1 4 5 -1 -1 -1 -1
+2
+
+Sample output-2:
+
+No
+
+
+Explanation:
+We build both trees from level order. Then, at level K, we compare the node values and count from both trees.
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+7
+1 2 3 -1 -1 -1 -1
+7
+1 2 3 -1 -1 -1 -1
+2
+Yes
+2	
+7
+1 2 3 -1 -1 -1 -1
+7
+1 4 5 -1 -1 -1 -1
+2
+No
+3	
+3
+1 -1 2
+3
+1 -1 2
+2
+Yes
+4	
+7
+1 2 3 -1 -1 -1 -1
+7
+1 2 4 -1 -1 -1 -1
+2
+No
