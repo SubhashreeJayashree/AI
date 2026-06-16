@@ -1,0 +1,69 @@
+Write a C program to construct two binary trees from level-order input (using -1 to represent NULL) and check if both trees are identical. Two binary trees are considered identical if they are structurally the same and have the same node values.
+
+
+Constraints:
+1≤N≤100 — total number of input elements (including -1s for NULLs)
+
+Node values range from −10^4-10^4.
+
+
+Example:
+Sample Input-1:
+
+7
+1 2 3 -1 -1 -1 -1
+7
+1 2 3 -1 -1 -1 -1
+
+Sample Output-1:
+
+Yes
+
+Sample Input-2:
+
+3
+1 -1 2
+3
+1 2 -1
+
+Sample Output-2:
+
+No
+
+
+Explanation:
+Trees are constructed from the level-order traversal, interpreting -1 as a null node.
+
+Recursively compare both trees:
+
+Check root values
+
+Recursively check left and right subtrees
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+7
+1 2 3 -1 -1 -1 -1
+7
+1 2 3 -1 -1 -1 -1
+Yes
+2	
+3
+1 -1 2
+3
+1 2 -1
+No
+3	
+3
+1 -1 2
+3
+1 -1 2
+Yes
+4	
+3
+1 -1 2
+3
+1 2 -1
+No
