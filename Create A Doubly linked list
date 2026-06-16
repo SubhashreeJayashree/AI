@@ -1,0 +1,66 @@
+Write a C program to create a Doubly Linked List (DLL).
+Each node contains an integer data field and two pointers:
+
+next (points to the next node)
+prev (points to the previous node).
+The program should allow inserting n elements and display the DLL both forwards and backwards.
+
+
+Constraints:
+1 ≤ n ≤ 10^5
+The values of each node: -10^6 ≤ data ≤ 10^6
+
+Example:
+Sample Input-1:
+
+5  
+10 20 30 40 50
+
+Sample Output-1:
+
+Forward: 10 20 30 40 50  
+Backward: 50 40 30 20 10
+
+Sample Input-2:
+
+1  
+100
+
+Sample Output-2:
+
+Forward: 100  
+Backward: 100
+
+ 
+
+
+Explanation:
+createNode(int data) creates a new node with data.
+appendNode() adds the node to the end of the DLL, updating both next and prev pointers.
+displayForward() prints the list from head to tail.
+displayBackward() prints the list from tail to head.
+The program reads n from runtime input, then n integers, and builds the list accordingly.
+Finally, it displays the list both forwards and backwards.
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+5
+10 20 30 40 50
+10 20 30 40 50
+50 40 30 20 10
+2	
+1
+100
+100
+100
+3	
+3
+-1 0 1
+-1 0 1
+1 0 -1
+4	
+4
+7 14 21 28
+7 14 21 28
+28 21 14 7
