@@ -1,0 +1,115 @@
+Implement a queue using a singly linked list. The program should support the following operations:
+
+Enqueue(X) → Insert element X at the rear of the queue.
+
+Dequeue() → Remove element from the front of the queue.
+
+Front() → Return the front element without removing it.
+
+Size() → Return the number of elements in the queue.
+
+IsEmpty() → Return true if the queue is empty, otherwise false.
+
+
+Constraints:
+The number of operations NNN should be 1≤N≤1000
+
+The values in the queue should be within −10^6≤X≤10^6
+
+
+Example:
+Sample Input-1:
+
+5
+1 10
+1 20
+3
+2
+3
+
+Sample Output-1:
+
+10
+20
+
+Sample Input-2:
+
+6
+1 5
+1 15
+4
+2
+4
+3
+
+Sample Output-2:
+
+2
+1
+15
+
+
+Explanation:
+We define a Node structure for the linked list.
+
+The Queue structure keeps track of:
+
+front (first element)
+
+rear (last element)
+
+size (current queue size)
+
+The enqueue() function inserts a new node at the rear.
+
+The dequeue() function removes a node from the front.
+
+The front() function returns the front element.
+
+The size() function returns the number of elements.
+
+The isEmpty() function checks if the queue is emp
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+5
+1 10
+1 20
+3
+2
+3
+10
+20
+2	
+6
+1 5
+1 15
+4
+2
+4
+3
+2
+1
+15
+3	
+4
+1 7
+1 8
+5
+3
+0
+7
+4	
+7
+1 50
+1 60
+2
+2
+5
+3
+4
+1
+-1
+0
