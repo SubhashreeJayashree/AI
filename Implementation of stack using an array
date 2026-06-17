@@ -1,0 +1,99 @@
+Implement a stack using an array with the following operations:
+
+Push(x) – Inserts an element x at the top of the stack.
+Pop() – Removes the top element from the stack.
+Peek() – Returns the top element without removing it.
+isEmpty() – Checks if the stack is empty.
+isFull() – Checks if the stack is full.
+The stack should support dynamic operations, meaning it should handle multiple push and pop operations.
+
+
+Constraints:
+1 ≤ n ≤ 10^5 (Maximum number of operations).
+-10^9 ≤ x ≤ 10^9 (Stack values range).
+The stack should be implemented using an array with a predefined maximum size (MAX_SIZE).
+Stack follows LIFO (Last-In-First-Out) order.
+
+Example:
+Sample Input-1:
+
+6
+PUSH 10
+PUSH 20
+PUSH 30
+PEEK
+POP
+PEEK
+
+Sample Output-1:
+
+30
+20
+
+Sample Input-2:
+
+5
+PUSH 5
+PUSH 10
+POP
+POP
+POP
+
+Sample Output-2:
+
+Stack Underflow
+
+ 
+
+ 
+
+
+Explanation:
+Input:
+First input: Number of operations, n.
+Next n lines contain an operation:
+"PUSH X" (insert X into the stack).
+"POP" (remove top element).
+"PEEK" (print top element).
+Output:
+If "POP" is called on an empty stack, print "Stack Underflow".
+If "PUSH" is called on a full stack, print "Stack Overflow".
+"PEEK" prints the top element.
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+6
+PUSH 10
+PUSH 20
+PUSH 30
+PEEK
+POP
+PEEK
+30
+20
+2	
+5
+PUSH 5
+PUSH 10
+POP
+POP
+POP
+Stack Underflow
+3	
+4
+PUSH 7
+PUSH 8
+PUSH 9
+PEEK
+9
+4	
+7
+PUSH 1
+PUSH 2
+PUSH 3
+PUSH 4
+PUSH 5
+PUSH 6
+Stack Overflow
+Stack Overflow
