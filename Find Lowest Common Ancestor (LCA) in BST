@@ -1,0 +1,80 @@
+Write a C program to find the Lowest Common Ancestor (LCA) of two given nodes in a Binary Search Tree (BST).
+In a BST, the LCA of two nodes n1 and n2 is the deepest node that has both n1 and n2 as descendants.
+
+
+Constraints:
+1 <= Number of nodes <= 1000
+
+-10^6 <= Node values <= 10^6
+
+It is guaranteed that both nodes exist in the BST.
+
+
+Example:
+Sample Input-1:
+
+6
+20 8 22 4 12 10
+10 22
+
+Sample Output-1:
+
+20
+
+Sample Input-2:
+
+5
+5 3 8 2 4
+2 4
+
+Sample Output-2:
+
+3
+
+
+Explanation:
+First Input:
+BST constructed from [20 8 22 4 12 10]:
+
+      20
+       /  \
+      8    22
+     / \
+    4  12
+       /
+      10
+
+LCA of 10 and 22 is 20.
+
+Second Input:
+BST from [5 3 8 2 4]:
+
+ 5
+   / \
+  3   8
+ / \
+2   4
+LCA of 2 and 4 is 3.
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+7
+15 10 20 8 12 17 25
+8 12
+10
+2	
+6
+30 20 40 10 25 35
+10 25
+20
+3	
+5
+50 30 70 20 40
+20 70
+50
+4	
+3
+7 3 9
+3 9
+7
