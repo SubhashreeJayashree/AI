@@ -1,0 +1,63 @@
+Write a C program to insert a node into a Binary Search Tree (BST). The program should first build the BST from a list of given integers and then insert an additional value into it. After insertion, perform an inorder traversal of the tree and print the result
+
+
+Constraints:
+1 <= Number of initial nodes <= 1000
+
+-10^6 <= Node value <= 10^6
+
+
+Example:
+Sample Input-1:
+
+5
+10 5 15 3 7
+8
+
+Sample Output-1:
+
+3 5 7 8 10 15
+
+Sample Input-2:
+
+4
+20 10 30 25
+35
+
+Sample Output-2:
+
+10 20 25 30 35
+
+
+Explanation:
+First line: Number of nodes n
+
+Second line: n space-separated integers to insert into the BST
+
+Third line: One integer to insert into the existing BST
+
+Output: Inorder traversal after the additional insertion
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+3
+2 1 3
+4
+1 2 3 4
+2	
+5
+5 3 8 1 4
+6
+1 3 4 5 6 8
+3	
+4
+40 20 60 50
+30
+20 30 40 50 60
+4	
+6
+25 15 35 10 20 30
+27
+10 15 20 25 27 30 35
