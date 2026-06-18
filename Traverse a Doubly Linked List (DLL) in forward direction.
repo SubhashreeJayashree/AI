@@ -1,0 +1,56 @@
+Write a C program to Traverse a Doubly Linked List (DLL) in forward direction.
+Each node of the DLL contains an integer data field and two pointers:
+
+next (points to the next node)
+prev (points to the previous node)
+The program should allow the user to create a DLL of n nodes, and then traverse and print the data of each node from head to tail.
+
+
+Constraints:
+1 ≤ n ≤ 10^5
+-10^6 ≤ data ≤ 10^6
+
+Example:
+Sample Input-1:
+
+5  
+10 20 30 40 50
+
+Sample Output-1:
+
+10 20 30 40 50
+
+Sample Input-2:
+
+1  
+100
+
+Sample Output-2:
+
+100
+
+
+Explanation:
+createNode(int data) creates a node with data and null pointers.
+appendNode() adds a new node to the end of the DLL, updating next and prev pointers accordingly.
+traverseForward() iterates from head to tail and prints each node's data.
+Inputs are read at runtime, no static values.
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+5
+10 20 30 40 50
+10 20 30 40 50
+2	
+1
+100
+100
+3	
+3
+-1 0 1
+-1 0 1
+4	
+4
+7 14 21 28
+7 14 21 28
