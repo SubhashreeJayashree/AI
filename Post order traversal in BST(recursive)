@@ -1,0 +1,55 @@
+Write a C program to perform postorder traversal (recursive) on a Binary Search Tree (BST). In postorder traversal, each node is processed after its subtrees: left → right → root.
+
+
+Constraints:
+1 <= Number of nodes <= 1000
+
+-10^6 <= Node values <= 10^6
+
+
+Example:
+Sample Input-1:
+
+5
+10 5 20 3 7
+
+Sample Output-1:
+
+3 7 5 20 10
+
+Sample Input-2:
+
+4
+40 30 50 35
+
+Sample Output-2:
+
+35 30 50 40
+
+
+Explanation:
+First line: Number of nodes n
+
+Second line: n space-separated integers inserted into BST.
+
+Output: Nodes printed in postorder traversal: left, right, root.
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+3
+2 1 3
+1 3 2
+2	
+4
+8 4 10 9
+4 9 10 8
+3	
+6
+50 30 70 20 40 60
+20 40 30 60 70 50
+4	
+1
+100
+100
