@@ -1,0 +1,74 @@
+Write a C program to construct a Binary Search Tree (BST) from the given preorder traversal of the tree.
+You need to build the BST following standard BST insertion rules based on preorder sequence and print its inorder traversal (to confirm it is a valid BST).
+
+
+Constraints:
+1 <= Number of nodes <= 1000
+
+-10^6 <= Node values <= 10^6
+
+
+Example:
+Sample Input-1:
+
+7
+10 5 1 7 40 30 50
+
+Sample output-1:
+
+1 5 7 10 30 40 50
+
+Sample Input-2:
+
+3
+8 5 10
+
+Sample Output-2:
+
+5 8 10
+
+
+Explanation:
+First Input:
+Preorder: 10 5 1 7 40 30 50
+BST constructed:
+
+       10
+       /   \
+      5     40
+     / \    /
+    1   7  30
+               \
+                50
+
+Inorder traversal gives sorted order: 1 5 7 10 30 40 50.
+
+Second Input:
+Preorder: 8 5 10
+BST:
+
+    8
+   / \
+  5   10
+
+Inorder: 5 8 10.
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+5
+20 10 5 15 30
+5 10 15 20 30
+2	
+4
+15 10 12 20
+10 12 15 20
+3	
+6
+50 30 20 40 70 60
+20 30 40 50 60 70
+4	
+3
+2 1 3
+1 2 3
