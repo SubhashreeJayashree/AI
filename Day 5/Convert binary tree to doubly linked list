@@ -1,0 +1,55 @@
+Write a C program to convert a binary tree into a doubly linked list (DLL) in-place. The DLL should be formed using the inorder traversal of the binary tree. The left and right pointers in nodes should be used as previous and next pointers in DLL.
+
+
+Constraints:
+Number of nodes 1 ≤ N ≤ 1000
+
+Node values are integers and not necessarily unique
+
+Input is provided as level-order, using -1 for NULL
+
+
+Example:
+Sample Input-1:
+
+7
+10 12 15 25 30 36 -1
+
+Sample Output-1:
+
+25 12 30 10 36 15
+
+Sample Input-2:
+
+5
+1 2 3 -1 -1
+
+Sample Output-2:
+
+2 1 3
+
+
+Explanation:
+Sample 1: Inorder traversal = 25 12 30 10 36 15, which becomes the doubly linked list.
+
+Sample 2: Inorder traversal = 2 1 3
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+7
+10 12 15 25 30 36 -1
+25 12 30 10 36 15
+2	
+5
+1 2 3 -1 -1
+2 1 3
+3	
+1
+100
+100
+4	
+3
+4 -1 5
+4 5 
