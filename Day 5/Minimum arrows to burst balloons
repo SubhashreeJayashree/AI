@@ -1,0 +1,116 @@
+There are a number of spherical balloons spread in a 2D plane. For each balloon, you are given the xstart​ and xend​ coordinates of the horizontal diameter. Since it's a sphere, all balloons are circular, and they extend infinitely in the y-direction. You are aiming to shoot arrows vertically. An arrow shot at x will burst all balloons whose horizontal diameter spans x.You want to find the minimum number of arrows required to burst all balloons.
+
+This problem can be optimally solved using a greedy approach.
+
+Input Format
+The first line contains an integer N, representing the total number of balloons.
+
+The next N lines each contain two integers, x_start and x_end, separated by a space, representing the start and end coordinates of a balloon's diameter.
+
+Output Format
+Print a single integer: the minimum number of arrows required to burst all balloons.
+
+
+Constraints:
+1 ≤ N ≤ 10⁵            (Number of balloons)
+
+-2³¹ ≤ x_start < x_end ≤ 2³¹ - 1  
+(Coordinates can be large. Use long long if intermediate calculations exceed int limits,  
+though for comparison and storage, int suffices here.)
+
+x_start and x_end will fit within a standard 32-bit signed integer.
+
+
+Example:
+Input:
+
+4
+
+10 16
+
+2 8
+
+1 6
+
+7 12
+
+Output:
+2
+
+
+Explanation:
+Given N = 4 and balloons (intervals): (10, 16), (2, 8), (1, 6), (7, 12).
+
+The greedy strategy for this problem is as follows:
+
+Sort the balloons based on their end coordinates. If end coordinates are the same, sort by start coordinates (optional, but good for consistency).
+
+(1, 6)
+
+(2, 8)
+
+(7, 12)
+
+(10, 16)
+
+Initialize arrows = 0 and last_arrow_pos = -infinity.
+
+Iterate through the sorted balloons:
+
+Consider Balloon (1, 6):
+
+Current last_arrow_pos is -infinity. This balloon cannot be burst by a previous arrow.
+
+Shoot a new arrow. Increment arrows to 1.
+
+To burst this balloon and potentially as many subsequent balloons as possible, shoot the arrow at its x_end. So, last_arrow_pos = 6.
+
+Consider Balloon (2, 8):
+
+Its x_start (2) is less than or equal to last_arrow_pos (6). Its x_end (8) is greater than or equal to last_arrow_pos (6).
+
+This means balloon (2, 8) can be burst by the arrow at x=6. No new arrow needed.
+
+last_arrow_pos remains 6.
+
+Consider Balloon (7, 12):
+
+Its x_start (7) is greater than last_arrow_pos (6). This balloon cannot be burst by the arrow at x=6.
+
+Shoot a new arrow. Increment arrows to 2.
+
+To burst this balloon and potentially subsequent ones, shoot the arrow at its x_end. So, last_arrow_pos = 12.
+
+Consider Balloon (10, 16):
+
+Its x_start (10) is less than or equal to last_arrow_pos (12). Its x_end (16) is greater than or equal to last_arrow_pos (12).
+
+This means balloon (10, 16) can be burst by the arrow at x=12. No new arrow needed.
+
+last_arrow_pos remains 12.
+
+The process completes. The minimum number of arrows required is 2.
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+4
+10 16
+2 8
+1 6
+7 12
+2
+2	
+3
+1 2
+3 4
+5 6
+3
+3	
+4
+1 10
+2 9
+3 8
+4 7
+1
