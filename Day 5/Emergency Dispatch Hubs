@@ -1,0 +1,76 @@
+A metropolitan area, whose road network is structured as a weighted tree, needs to optimize its emergency response infrastructure. The network consists of N critical intersections connected by N-1 roads, each with a specific travel time (weight).
+
+The city council has approved the budget to build exactly K emergency dispatch hubs at these intersections. When an incident occurs at any intersection u, the response time is determined by the travel time along the shortest path from u to its nearest dispatch hub.
+
+As the city's emergency response planner, your task is to determine the optimal placement of these K hubs to minimize the maximum possible response time for an incident occurring at any intersection in the city.
+
+Input Format:
+
+The first line contains two space-separated integers: N (the number of intersections) and K (the number of dispatch hubs to be placed).
+
+The next N-1 lines each contain three space-separated integers: u, v, and w, representing a road between intersection u and v with a travel time of w. Intersections are numbered from 1 to N.
+
+Output Format:
+
+Print a single integer representing the minimized maximum response time.
+
+
+Constraints:
+1 <= K <= N <= 100,000
+
+1 <= u, v <= N, u != v
+
+1 <= w <= 10,000
+
+The given graph is guaranteed to be a tree.
+
+The total sum of all edge weights will not exceed 10^9.
+
+
+Example:
+Sample Input:
+
+7 2
+1 2 10
+1 3 5
+2 4 8
+2 5 3
+3 6 12
+3 7 6
+
+Sample output:
+
+8
+
+
+Explanation:
+NA
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+5 1
+1 2 10
+2 3 10
+3 4 10
+4 5 10
+30
+2	
+6 2
+1 2 10
+1 3 10
+1 4 10
+1 5 10
+1 6 10
+0
+3	
+8 3
+1 2 5
+2 3 5
+3 4 5
+2 5 3
+2 6 3
+3 7 3
+3 8 3
+0
