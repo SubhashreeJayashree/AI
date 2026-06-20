@@ -1,0 +1,72 @@
+You are given a sequence of N items. Each item i has an integer value[i] and a color[i]. Your task is to find the number of non-empty subsequences that satisfy a specific set of four rules simultaneously.
+
+A subsequence is formed by deleting zero or more items from the original sequence and preserving the relative order of the remaining items.
+
+A subsequence is considered valid if it meets all of the following criteria:
+
+Strictly Increasing Values: The values of the items in the subsequence must be strictly increasing.
+
+Chromatic Alternation: No two adjacent items in the subsequence can have the same color.
+
+Odd Length: The total number of items in the subsequence must be odd.
+
+Target Color Parity: The number of items in the subsequence whose color is a specific C_target must be even.
+
+You need to calculate the total count of such valid subsequences. As the result can be very large, output it modulo 10^9 + 7.
+
+Input Format
+
+The first line contains three space-separated integers: N (the number of items), K (the number of distinct colors, numbered 1 to K), and C_target (the target color).
+
+The second line contains N space-separated integers, representing the values of the items.
+
+The third line contains N space-separated integers, representing the colors of the items.
+
+Output Format
+
+Print a single integer representing the total number of valid subsequences modulo 10^9 + 7.
+
+
+Constraints:
+1 <= N <= 2000
+
+1 <= values[i] <= 2000
+
+1 <= K <= 10
+
+1 <= colors[i], C_target <= K
+
+
+Example:
+Sample Input:
+
+4 2 1
+10 20 10 30
+1 2 1 1
+
+Sample Output:
+
+2
+
+
+Explanation:
+NA
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+5 3 2
+10 20 30 40 50
+1 2 1 2 1
+5
+2	
+3 2 1
+10 20 30
+1 2 1
+2
+3	
+5 2 1
+50 40 30 20 10
+1 2 1 2 1
+2
