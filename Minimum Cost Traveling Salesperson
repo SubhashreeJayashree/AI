@@ -1,0 +1,108 @@
+You are given a map with N cities, numbered from 0 to N-1. You are also provided with a cost matrix cost[i][j] which represents the cost to travel directly from city i to city j. Your goal is to find the minimum total cost to visit every city exactly once, starting from city 0 and finally returning to city 0.
+
+This is a classic NP-hard problem, but for a small number of cities (N), it can be solved efficiently using Dynamic Programming with Bitmasking.
+
+Input Format
+The first line contains an integer N, representing the number of cities.
+
+The next N lines each contain N integers, where the j-th integer on the i-th line is cost[i][j]. Note that cost[i][i] will be 0.
+
+Output Format
+Print a single integer: the minimum total cost to complete the circular tour visiting all cities.
+
+
+Constraints:
+1 ≤ N ≤ 18 (The constraint N=18 makes Bitmask DP feasible within typical time limits)
+
+0 ≤ cost[i][j] ≤ 1000 (Cost to travel between cities)
+
+cost[i][i] = 0 (Cost to travel from a city to itself is zero)
+
+It's always possible to travel between any two distinct cities.
+
+The total cost can exceed the range of a 32-bit integer, so use long long for accumulated costs.
+
+
+Example:
+Input:
+
+4
+
+0 10 15 20
+
+10 0 35 25
+
+15 35 0 30
+
+20 25 30 0
+
+Output:
+
+80
+
+
+Explanation:
+Given N = 4 and the cost matrix:
+
+0 1 2 3
+
+0 [0 10 15 20]
+
+1 [10 0 35 25]
+
+2 [15 35 0 30]
+
+3 [20 25 30 0]
+
+The goal is to start at city 0, visit cities 1, 2, and 3 exactly once, and then return to city 0, with the minimum total cost.
+
+This problem can be solved using Dynamic Programming with a bitmask. Let dp[mask][i] be the minimum cost to visit all cities represented by the mask, ending at city i.
+
+mask: A bitmask where the k-th bit is set if city k has been visited.
+
+i: The last city visited in the path represented by mask.
+
+Base Case:
+
+dp[1 << 0][0] = 0 (Starting at city 0, only city 0 is visited, mask is 0001 in binary, cost is 0).
+
+Transitions: For each mask from 1 to (1 << N) - 1: For each city u from 0 to N-1: If u is in mask and dp[mask][u] is reachable (not infinity): For each city v from 0 to N-1: If v is NOT in mask (i.e., v has not been visited yet): Calculate next_mask = mask | (1 << v) (add v to the visited set). dp[next_mask][v] = min(dp[next_mask][v], dp[mask][u] + cost[u][v])
+
+Final Answer: Once the DP table is filled, the minimum total cost is found by considering paths that visit all cities (all_visited_mask = (1 << N) - 1) and end at any city i, then adding the cost to return to city 0: min_total_cost = min(dp[all_visited_mask][i] + cost[i][0]) for all i from 0 to N-1.
+
+Trace for Sample Input:
+
+The optimal path for this sample is 0 -> 1 -> 3 -> 2 -> 0. Let's calculate its cost:
+
+Cost from 0 to 1: cost[0][1] = 10
+
+Cost from 1 to 3: cost[1][3] = 25
+
+Cost from 3 to 2: cost[3][2] = 30
+
+Cost from 2 to 0: cost[2][0] = 15 Total cost = 10 + 25 + 30 + 15 = 80.
+
+This approach systematically explores all valid paths to find the one with the minimum cost.
+
+
+Public Test Cases:
+#	INPUT	EXPECTED OUTPUT
+1	
+4
+0 10 15 20
+10 0 35 25
+15 35 0 30
+20 25 30 0
+80
+2	
+3
+0 1 10
+1 0 5
+10 5 0
+16
+3	
+3
+0 10 1
+5 0 2
+3 4 0
+10
