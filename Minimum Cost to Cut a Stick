@@ -1,0 +1,116 @@
+You are given a wooden stick of length L. You are also given an array cuts of N integers, where cuts[i] is the position where you need to make a cut. These cut positions are relative to the original stick's start (0). You need to make all the specified cuts in the cuts array.
+
+The cost of making a cut is equal to the length of the stick segment you are cutting. For example, if you have a stick segment from position A to position B (length B-A), and you make a cut at position C (where A < C < B), the cost incurred for this cut is (B - A). After this cut, you are left with two smaller stick segments: [A, C] and [C, B]. You then proceed to make any remaining cuts on these smaller segments.
+
+Your task is to find the minimum total cost to make all the required cuts.
+
+Input Format
+The first line contains an integer L, representing the total length of the stick.
+
+The second line contains an integer N, representing the number of cuts to be made.
+
+The third line contains N integers, cuts_0, cuts_1, ..., cuts_{N-1}, separated by spaces, representing the positions where cuts must be made.
+
+Output Format
+Print a single integer: the minimum total cost to make all cuts.
+
+
+Constraints:
+1 ≤ L ≤ 10⁹      (Length of the stick)  
+1 ≤ N ≤ 100    (Number of cuts)  
+
+0 < cuts[i] < L     (Each cut position is strictly between 0 and L)  
+All cuts[i] are distinct.
+
+The total cost can be very large,  
+so use a long long (or equivalent in your chosen language) data type for storing the total cost.
+
+
+Example:
+Input:
+
+7
+
+2
+
+1 5
+
+Output:
+12
+
+
+Explanation:
+Given L = 7, N = 2, and cuts = [1, 5].
+
+To solve this using Dynamic Programming, we need to transform the problem slightly. First, create an extended_cuts array by adding 0 at the beginning and L at the end to the sorted cuts array. This helps define the boundaries of the stick segment for our DP state.
+
+For L = 7, cuts = [1, 5]:
+
+Sort cuts: [1, 5]
+
+Create extended_cuts: [0, 1, 5, 7] (new length N_ext = N + 2 = 4)
+
+Let dp[i][j] be the minimum cost to make all cuts specified within the stick segment defined by extended_cuts[i] and extended_cuts[j]. That is, we are considering cuts that fall between extended_cuts[i] and extended_cuts[j].
+
+Base Cases:
+
+If j = i + 1, it means the segment [extended_cuts[i], extended_cuts[j]] has no cuts to be made internally (it's either a single original cut segment or a newly formed segment between two adjacent cuts). So, dp[i][j] = 0.
+
+Recurrence Relation: For a segment [extended_cuts[i], extended_cuts[j]], we iterate through all possible intermediate cut positions k (where i < k < j). We consider extended_cuts[k] as the last cut made within this segment. When extended_cuts[k] is the last cut, its cost is (extended_cuts[j] - extended_cuts[i]). After this cut, the problem breaks into two independent subproblems:
+
+Cutting the left segment [extended_cuts[i], extended_cuts[k]]. The minimum cost for this is dp[i][k].
+
+Cutting the right segment [extended_cuts[k], extended_cuts[j]]. The minimum cost for this is dp[k][j].
+
+So, the dp[i][j] value is the minimum of: dp[i][k] + dp[k][j] + (extended_cuts[j] - extended_cuts[i]) for all k such that i < k < j.
+
+Building the DP table (Order of Computation): We build the dp table by iterating through increasing length of the segments being considered (where length here refers to the number of original cuts positions between extended_cuts[i] and extended_cuts[j]). Or, more simply, iterate by gap = j - i.
+
+gap: The length of the segment in terms of indices in extended_cuts array. gap ranges from 2 up to N_ext - 1.
+
+i: The starting index in extended_cuts. i ranges from 0 to N_ext - 1 - gap.
+
+j: The ending index in extended_cuts. j = i + gap.
+
+k: The index of the intermediate cut. k ranges from i + 1 to j - 1.
+
+Final Answer: The minimum total cost to make all cuts on the original stick will be dp[0][N_ext - 1]. This corresponds to the segment [extended_cuts[0], extended_cuts[N_ext - 1]], which is [0, L].
+
+Trace for Sample Input L = 7, cuts = [1, 5]: extended_cuts = [0, 1, 5, 7] (N_ext = 4)
+
+Initialize dp table (size 4x4) with 0 for base cases (gap=1, i.e., dp[i][i+1] = 0) and a very large value (infinity) for others.
+
+gap = 2:
+
+i = 0, j = 2: Segment [0, 5]. Intermediate cut k = 1 (extended_cuts[1]=1). dp[0][2] = dp[0][1] + dp[1][2] + (extended_cuts[2] - extended_cuts[0]) dp[0][2] = 0 + 0 + (5 - 0) = 5
+
+i = 1, j = 3: Segment [1, 7]. Intermediate cut k = 2 (extended_cuts[2]=5). dp[1][3] = dp[1][2] + dp[2][3] + (extended_cuts[3] - extended_cuts[1]) dp[1][3] = 0 + 0 + (7 - 1) = 6
+
+gap = 3:
+
+i = 0, j = 3: Segment [0, 7]. Intermediate cuts k = 1 (extended_cuts[1]=1) or k = 2 (extended_cuts[2]=5).
+
+If k = 1 (last cut at 1): Cost = dp[0][1] (segment [0,1]) + dp[1][3] (segment [1,7]) + (7 - 0) (cost of last cut) Cost = 0 + 6 + 7 = 13
+
+If k = 2 (last cut at 5): Cost = dp[0][2] (segment [0,5]) + dp[2][3] (segment [5,7]) + (7 - 0) (cost of last cut) Cost = 5 + 0 + 7 = 12 dp[0][3] = min(13, 12) = 12.
+
+Final answer: dp[0][3] = 12.
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+7
+2
+1 5
+12
+2	
+10
+3
+1 5 8
+20
+3	
+100
+1
+50
+100
