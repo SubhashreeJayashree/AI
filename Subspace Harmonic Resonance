@@ -1,0 +1,60 @@
+An array of N subspace amplifiers, indexed 0 to N-1, must be configured for a critical experiment. Each amplifier i has a fixed base frequency F[i]. To tune the system, you can apply an integer "boost" b_i to each amplifier, where 0 <= b_i <= B_max. The final frequency of amplifier i is then calculated as f_i = F[i] + b_i.
+
+For the entire system to be stable and achieve resonance, two strict conditions must be met simultaneously:
+
+Local Harmony: For every pair of adjacent amplifiers i and i+1 (from i=0 to N-2), the final frequency of amplifier i+1 must be a perfect multiple of the final frequency of amplifier i. That is, f_{i+1} % f_i == 0.
+
+Global Resonance: The sum of all applied boosts across all amplifiers must be exactly equal to a specific target value, B_total. That is, Σ(b_i) = B_total for i from 0 to N-1.
+
+Your task is to determine the number of distinct valid configurations. A configuration is a unique assignment of boosts (b_0, b_1, ..., b_{N-1}) that satisfies both the Local Harmony and Global Resonance conditions. Since this number can be very large, you must output the result modulo 10^9 + 7.
+
+Input Format
+
+The first line contains three space-separated integers: N, B_max, and B_total.
+
+The second line contains N space-separated integers, representing the base frequencies F[0], F[1], ..., F[N-1].
+
+Output Format
+
+Print a single integer representing the total number of valid configurations modulo 10^9 + 7.
+
+
+Constraints:
+1 <= N <= 50
+
+1 <= F[i] <= 100
+
+0 <= B_max <= 50
+
+0 <= B_total <= 2500
+
+
+Example:
+Sample Input:
+
+2 5 3
+3 10
+
+Sample Output:
+
+1
+
+
+Explanation:
+NA
+
+
+Public Test Cases:
+#	Input	Expected Output
+1	
+4 2 4
+1 1 1 1
+2
+2	
+5 10 5
+13 17 19 23 29
+0
+3	
+3 2 3
+10 18 35
+0
