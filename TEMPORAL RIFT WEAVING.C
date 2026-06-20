@@ -4,63 +4,84 @@
 
 #define MOD 1000000007
 
-// DP tables: dp[c][e] = number of ways to reach cell (r,c) with energy e
-// We use two arrays (current row and previous row) to optimize space
-long long dp[75][3001];
+// DP table: dp[c][e] = number of ways to reach cell (r, c) with energy e.
+// We use two arrays (for the current and previous row) to optimize space.
+// The energy 'e' is mapped to an index using an offset.
+long long dp[75][3001]; // Max C=75, Max E range = 2*1500+1 = 3001
 long long prev_dp[75][3001];
 
 int main() {
-    int R, C, Emax;
-    scanf("%d %d %d", &R, &C, &Emax);
+    int R, C, E_max;
+    scanf("%d %d %d", &R, &C, &E_max);
 
-    int T[75][75];
+    int T[R][C];
     for (int i = 0; i < R; i++) {
         for (int j = 0; j < C; j++) {
             scanf("%d", &T[i][j]);
         }
     }
 
-    int offset = Emax; // map energy [-Emax..Emax] to index [0..2*Emax]
-    int maxRange = 2 * Emax + 1;
+    // The energy 'e' can range from -E_max to +E_max.
+    // We use an offset to map this range to array indices [0, 2*E_max].
+    int offset = E_max;
+    int energy_range = 2 * E_max + 1;
 
-    // Initialize DP for first cell (0,0) with energy = 0
-    memset(prev_dp, 0, sizeof(prev_dp));
-    prev_dp[0][offset] = 1;
+    // --- Base Case: Start at (0, 0) ---
+    // At (0,0), the energy is 0. There's 1 way to be here.
+    // Check if |0| <= E_max, which is always true for E_max >= 0.
+    dp[0][0 + offset] = 1;
 
-    // Process row by row
+    // --- DP Iteration ---
+    // Iterate through each cell of the grid
     for (int r = 0; r < R; r++) {
-        memset(dp, 0, sizeof(dp));
+        // For the first row (r=0), we only need to handle moves from the left.
+        // For subsequent rows, we handle moves from above and left.
+        if (r > 0) {
+             // For r > 0, the dp state from the previous row becomes prev_dp
+             // and the current row's dp is reset.
+             memcpy(prev_dp, dp, sizeof(dp));
+             memset(dp, 0, sizeof(dp));
+        }
+
         for (int c = 0; c < C; c++) {
-            for (int e = 0; e < maxRange; e++) {
-                long long ways = prev_dp[c][e];
-                if (ways == 0) continue;
-
-                int energy = e - offset;
-
-                // Move Right
-                if (c + 1 < C) {
-                    int newEnergy = energy + (T[r][c+1] - T[r][c]);
-                    if (newEnergy >= -Emax && newEnergy <= Emax) {
-                        dp[c+1][newEnergy + offset] = 
-                            (dp[c+1][newEnergy + offset] + ways) % MOD;
+            // --- Transition from Above (r-1, c) -> (r, c) ---
+            if (r > 0) {
+                int delta_E = T[r][c] - T[r-1][c];
+                // Iterate through all possible energy states from the cell above
+                for (int e = -E_max; e <= E_max; e++) {
+                    if (prev_dp[c][e + offset] > 0) {
+                        int new_E = e + delta_E;
+                        // Check Paradox Avoidance condition
+                        if (abs(new_E) <= E_max) {
+                            dp[c][new_E + offset] = (dp[c][new_E + offset] + prev_dp[c][e + offset]) % MOD;
+                        }
                     }
                 }
+            }
 
-                // Move Down
-                if (r + 1 < R) {
-                    int newEnergy = energy + (T[r+1][c] - T[r][c]);
-                    if (newEnergy >= -Emax && newEnergy <= Emax) {
-                        prev_dp[c][newEnergy + offset] = 
-                            (prev_dp[c][newEnergy + offset] + ways) % MOD;
+            // --- Transition from Left (r, c-1) -> (r, c) ---
+            if (c > 0) {
+                int delta_E = T[r][c] - T[r][c-1];
+                 // Iterate through all possible energy states from the cell to the left
+                for (int e = -E_max; e <= E_max; e++) {
+                    if (dp[c-1][e + offset] > 0) {
+                        int new_E = e + delta_E;
+                        // Check Paradox Avoidance condition
+                        if (abs(new_E) <= E_max) {
+                            dp[c][new_E + offset] = (dp[c][new_E + offset] + dp[c-1][e + offset]) % MOD;
+                        }
                     }
                 }
             }
         }
-        // Copy current row dp into prev_dp for next row
-        memcpy(prev_dp, dp, sizeof(dp));
     }
 
-    // Answer: number of ways to reach (R-1,C-1) with energy = 0
-    printf("%lld\n", prev_dp[C-1][offset] % MOD);
+    // --- Final Answer ---
+    // The result is the number of ways to reach the destination (R-1, C-1)
+    // with a final energy of exactly 0.
+    long long final_ways = dp[C-1][0 + offset];
+    
+    printf("%lld\n", final_ways);
+
     return 0;
 }
